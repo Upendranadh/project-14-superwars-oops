@@ -26,7 +26,7 @@ class Player {
   constructor(id, name, type) {
     // Create member variables and assign values
     // Type your code
-    this.id = id;
+    this.id = id + 1;
     this.name = name;
     this.type = type;
     this.strength = this.getRandomStrength();
@@ -45,6 +45,7 @@ class Player {
 
     const div = document.createElement("div");
     div.className = "player";
+    div.setAttribute("data-id", this.id + 1);
     div.innerHTML = `<img src="${this.image}" alt=""><div class="name">${this.name}</div><div class="strength">${this.strength}</div>`;
 
     return div;
@@ -63,8 +64,8 @@ class Superwar {
     this.players = players.map((player, id) => {
       let playerobj;
       (id + 1) % 2 === 0
-        ? (playerobj = new Player(id + 1, player, "hero"))
-        : (playerobj = new Player(id + 1, player, "villain"));
+        ? (playerobj = new Player(id, player, "hero"))
+        : (playerobj = new Player(id, player, "villain"));
       return playerobj;
     });
     // Type your code here
@@ -90,7 +91,6 @@ class Superwar {
     this.players
       .filter((player) => player.type === type)
       .forEach((player) => fragment.appendChild(player.view()));
-    console.log(this.players);
     return fragment;
   };
 }
